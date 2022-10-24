@@ -151,7 +151,6 @@ input, select{
     background-color:rgb(214, 240, 245) !important;
 }
 
-
 .loginHeader{
     float: left;
     margin-left: 2%;
@@ -172,15 +171,11 @@ header, footer{
     border-color: rgb(4, 182, 143);
     border-style: solid;
     box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
-    
-    
 }
 
 select{
     box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);
 }
-
-
 
 footer{
     position: fixed;
@@ -210,14 +205,10 @@ header{
     
 }
 
-
-
 .table{
     box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);
     
 }
-
-
 
 button{
     margin: 2px;
@@ -228,8 +219,6 @@ button{
 textarea{
     box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
 }
-
-
 
 
 /*FIM CSS IMPORTADO*/
@@ -266,7 +255,6 @@ textarea{
     height: 50px;
 }
 
-
 .imgSom{
     height: 100% !important;
     margin-left: 1%;
@@ -291,4 +279,48 @@ textarea{
 }
 .painelHeader{
     font-size: large;
+}
+
+main {
+    width: 100% !important;
+    text-align: center;
+    vertical-align: middle !important;
+    border-color: red;
+    border-style: solid;
+    border-width: 1px;
+
+    margin: 0 auto !important;
+}
+
+.mesaTabela {
+    width: 80% !important;
+    text-align: right !important;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+.mesaTr,
+.mesaTd {
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+.mesaTd {
+    height: 14vh;
+    cursor: pointer;
+}
+
+.btnRolar {
+    margin: 1%;
+}
+
+.painel {
+    text-align: left;
+    width: 0 auto;
+    position: fixed;
+
+}
+
+.linkYT {
+    color: red;
 }
