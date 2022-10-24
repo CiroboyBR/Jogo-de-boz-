@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/css.css">
+
+    <script src="libs/sweetalert2.all.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/js.js"></script>
+
+    <title>Jogo de bozó online</title>
+
+    <script>
+        var imagensMesa = ["", "flamengo2.png", "corinthians.jpg", "palmeiras.png", "santos.png", "saopaulo.png", "vasco.png"];
+
+        var numerosSelecionados = [false, false, false, false, false, false, false];
+        var numerosValorApostas = [0, 0, 0, 0, 0, 0, 0];
+        var numerosEstatisticas = [0, 0, 0, 0, 0, 0, 0];
+        var numerosPorcentagens = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+        var numSorteados = [0, 0, 0];
+        var dinheiro = 1000;
+
+        var tamTimesMesa = 30;
+        var tamTimesResultado = 5;
+        var tamTimesBalao = 15;
+        var valorGanho = 0;
+        var snGanhouPremio = false;
+
+
+        var audio_premio = new Audio('som/premio.wav');
+        var audio_perdeuTudo = new Audio('som/perdeu_tudo.mp3');
+        var audio_errou = new Audio('som/errou.mp3');
+
+    </script>
+
+
+</head>
+
+<body>
+    <header>
+        <h3>Bozó Online</h3>
+    </header>
+
+    <main>
+
+
+
+        <table class="mesaTabela">
+            <tr>
+                <td rowspan="3" width="20%" id="tdDinheiro">Dinheiro:</td>
+            </tr>
+
+            <tr class="mesaTr">
+                <td class="mesaTd" width="25%" id="num1" style="background-color: white;" onclick="selecionaNumero(1);">
+                    1</td>
+                <td class="mesaTd" width="25%" id="num2" style="background-color: white;" onclick="selecionaNumero(2);">
+                    2</td>
+                <td class="mesaTd" width="25%" id="num3" style="background-color: white;" onclick="selecionaNumero(3);">
+                    3</td>
+            </tr>
+            <tr class="mesaTr">
+                <td class="mesaTd" id="num4" style="background-color: white;" onclick="selecionaNumero(4);">4</td>
+                <td class="mesaTd" id="num5" style="background-color: white;" onclick="selecionaNumero(5);">5</td>
+                <td class="mesaTd" id="num6" style="background-color: white;" onclick="selecionaNumero(6);">6</td>
+            </tr>
+        </table>
+
+        <button class="btnRolar" onclick="rolaBozo();">ROLAR BOZÓ</button>
+
+        <div id="resultado"></div>
+
+    </main>
+
+
+
+    <script>
+        function atualizaImagens() {
+            for (let i = 1; i < 7; i++) {
+                if (numerosEstatisticas[0] > 0)
+                    atualizaPorcentagens(i);
+
+                document.getElementById('num' + i).innerHTML = numerosPorcentagens[i].toFixed(1) + "% <img src='img/" + imagensMesa[i] + "' alt='' width='" + tamTimesMesa + "%'>"
+            }
+        }
+
+        function atualizaPorcentagens(num) {
+            numerosPorcentagens[num] = (parseFloat(numerosEstatisticas[num]) * parseFloat(100.0)) / parseFloat(numerosEstatisticas[0]);
+            console.log(numerosPorcentagens[num].toFixed(2))
+        }
+
+
+
+
+        function selecionaNumero(numero) {
+
+            apostaDinheiro(numero);
+
+        }
+
+
+
+        function rolaBozo() {
+            valorGanho = 0;
+            snGanhouPremio = false;
+
+
+
+
+            for (let i = 0; i < 3; i++) {
+                //sorteia numero
+                numSorteados[i] = parseInt(Math.floor(Math.random() * 6 + 1));
+                numerosEstatisticas[numSorteados[i]]++;
+                numerosEstatisticas[0]++;
+
+                //premia os acertos
+                for (let x = 1; x < 7; x++)
+                    if (numSorteados[i] == x && numerosValorApostas[x] > 0) {
+                        valorGanho = parseInt(valorGanho) + parseInt(numerosValorApostas[x]);
+                        console.log('Numero acertado: ' + x);
+                        snGanhouPremio = true;
+                    }
+            }
+
+            tocaSom();
+
+            //devolve os valores apostados em caso de acerto
+            for (let i = 0; i < 3; i++) {
+                for (let x = 1; x < 7; x++) {
+                    if (numSorteados[i] == x && numerosValorApostas[x] > 0) {
+                        dinheiro = parseInt(dinheiro) + parseInt(numerosValorApostas[x]);
+
+                        numerosValorApostas[x] = 0;
+                    }
+                }
+            }
+            dinheiro = parseInt(dinheiro) + parseInt(valorGanho);
+
+
+
+
+
+            document.getElementById('resultado').innerHTML = "Sorteados: <img src='img/" + imagensMesa[numSorteados[0]] + "' alt='' width='" + tamTimesResultado + "%'>" + "<img src='img/" + imagensMesa[numSorteados[1]] + "' alt='' width='" + tamTimesResultado + "%'>" + "<img src='img/" + imagensMesa[numSorteados[2]] + "' alt='' width='" + tamTimesResultado + "%'>";
+
+
+            resetaApostas();
+            document.getElementById('tdDinheiro').innerHTML = "R$ " + dinheiro;
+
+            //se perder tudo
+            if (dinheiro <= 0)
+                audio_perdeuTudo.play();
+
+            console.log(numerosEstatisticas);
+            atualizaImagens();
+        }
+
+        function tocaSom() {
+            if (sn_apostouDinheiro() == true) {
+                //audio se for premiado acertando algum numero
+                if (snGanhouPremio) {
+                    console.log('entrou!')
+                    audio_premio.play();
+                    msgOK("Acertou: <img src='img/" + imagensMesa[numSorteados[0]] + "' alt='' width='" + tamTimesBalao + "%'>" + "<img src='img/" + imagensMesa[numSorteados[1]] + "' alt='' width='" + tamTimesBalao + "%'>" + "<img src='img/" + imagensMesa[numSorteados[2]] + "' alt='' width='" + tamTimesBalao + "%'>", 2000);
+                } else {
+                    audio_errou.play();
+                    msgErro("Errou: <img src='img/" + imagensMesa[numSorteados[0]] + "' alt='' width='" + tamTimesBalao + "%'>" + "<img src='img/" + imagensMesa[numSorteados[1]] + "' alt='' width='" + tamTimesBalao + "%'>" + "<img src='img/" + imagensMesa[numSorteados[2]] + "' alt='' width='" + tamTimesBalao + "%'>", 2000);
+                }
+            }
+        }
+
+        function resetaApostas() {
+            for (let i = 1; i < 7; i++) {
+
+                document.getElementById('num' + i).style.backgroundColor = "white";
+                numerosSelecionados[i] = false;
+                numerosValorApostas[i] = parseInt(0);
+            }
+        }
+
+        function apostaDinheiro(numeroApostado) {
+            if (dinheiro > 0) {
+                Swal.fire({
+                    title: 'Valor da aposta',
+                    html: "<input class='swal2-input' type='digit' id='valorAposta' value='100'>",
+                    stopKeydownPropagation: false,
+                    preConfirm: () => {
+                        if (dinheiro - parseInt(document.getElementById('valorAposta').value) >= 0) {
+                            console.log(document.getElementById('valorAposta').value)
+                            dinheiro = parseInt(dinheiro) - parseInt(document.getElementById('valorAposta').value)
+                            numerosValorApostas[numeroApostado] = parseInt(numerosValorApostas[numeroApostado]) + parseInt(document.getElementById('valorAposta').value)
+                            document.getElementById('tdDinheiro').innerHTML = "R$ " + dinheiro;
+
+                            numerosSelecionados[numeroApostado] = true;
+                            document.getElementById('num' + numeroApostado).style.backgroundColor = "lightgreen";
+
+                            return true;
+                        } else
+                            return false;
+                    },
+                    willOpen: () => {
+
+                    }
+                });
+            } else {
+                msgErro('acabou a grana!', 3000);
+            }
+
+
+        }
+
+
+        //verifica se foi apostado em algum time
+        function sn_apostouDinheiro() {
+            for (let i = 1; i < 7; i++) {
+                if (numerosValorApostas[i] > 0)
+                    return true;
+            }
+
+            return false;
+        }
+
+        document.getElementById('tdDinheiro').innerHTML = "R$ " + dinheiro;
+        atualizaImagens();
+    </script>
+
+    <footer>
+
+        <span class="spanFooter">
+            <style>
+                .linkYT {
+                    color: red;
+                }
+            </style>
+            Desenvolvedor: @CiroboyBR
+            <br>Youtube: <a class="linkYT" href="https://www.youtube.com/c/CiroMenesesBR" target="_blank"
+                rel="noopener noreferrer">https://www.youtube.com/c/CiroMenesesBR</a>
+            <!-- <br>Acessos: </span> -->
+
+    </footer>
+
+    <style>
+        main {
+            width: 100% !important;
+            text-align: center;
+            vertical-align: middle !important;
+            border-color: red;
+            border-style: solid;
+            border-width: 1px;
+
+            margin: 0 auto !important;
+        }
+
+        .mesaTabela {
+            width: 80% !important;
+            text-align: right !important;
+            vertical-align: middle;
+            margin: 0 auto;
+        }
+
+        .mesaTr,
+        .mesaTd {
+            text-align: center !important;
+            vertical-align: middle;
+        }
+
+        .mesaTd {
+            height: 14vh;
+            cursor: pointer;
+        }
+
+        .btnRolar {
+            margin: 1%;
+        }
+
+        .painel {
+            text-align: left;
+            width: 0 auto;
+            position: fixed;
+
+        }
+    </style>
+
+</body>
+
+</html>

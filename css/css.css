@@ -1,0 +1,294 @@
+
+ body {
+    background-color: #f4f2fa !important;
+}
+
+input, select{
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);
+    padding: 0.1%;
+    margin: 0 !important;
+}
+
+label{
+    margin: 0.1%;
+}
+
+select{
+    height: 55%;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    padding: 0.5% !important;
+}
+
+input {
+    height: auto;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    padding: 0.5% !important;
+}
+form h2{
+    color: white;
+}
+
+#divResponsavel{
+    display: none;
+}
+
+label{
+    margin-top: 6px;
+}
+
+/*Popup de carregamento*/
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba(255, 255, 255, 0.8) 
+                url("../img/load.gif") 
+                50% 50% 
+                no-repeat;
+}
+
+.modalTexto {
+text-align: center;
+margin: auto;
+vertical-align: middle;
+
+}
+
+body.loading .modal {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
+}
+/*FIM ---- Popup de carregamento*/
+
+/*CSS IMPORTADO*/
+tr{
+    border: 1px solid rgb(23, 162, 184) !important;
+    
+}
+th{
+    margin: 0.1%;
+    padding: 1px;
+    text-align: left;
+    /*box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);*/
+    border: 1px solid rgb(23, 162, 184) !important;
+}
+
+td{
+    margin: 1px;
+    padding: 1px;
+    text-align: left;
+    /*box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);*/
+    border: 1px solid rgb(23, 162, 184) !important;
+}
+
+table {
+    margin: 1px;
+    padding: 1px;
+    border: 1px solid rgb(23, 162, 184);
+   /* box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);*/
+}
+
+.tdCenter{
+    border: 1px solid black;
+    text-align: center !important;
+    }
+    
+.tdLeft{
+border: 1px solid black;
+text-align: left !important;
+padding-left: 2px;
+padding-right: 2px;
+}
+
+.tableRelatorio{
+    
+    margin: 0px !important;
+    padding: 0px !important;
+    padding-right: 0,5px !important;
+    padding-left: 2px !important;
+}
+.thRelatorio{
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid black !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.tdJustificativa{
+    background-color:rgb(255, 235, 235) !important;
+    padding-left: 1px !important;
+    
+}
+
+.tdJustificativaRel{
+    background-color:rgb(255, 235, 235) !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    text-align: center; border: 1px solid rgb(23, 162, 184) !important; font-size: 8px;
+    padding-left: 2px !important;
+}
+
+body{
+    background-color:#ffffff !important;
+    margin: 2px;
+}
+
+input, select{
+    background-color:rgb(214, 240, 245) !important;
+}
+
+
+.loginHeader{
+    float: left;
+    margin-left: 2%;
+    /*color: rgb(13, 4, 117);*/
+    text-align: left !important;
+    font-size: medium;
+    font-weight:normal;
+}
+
+header, footer{
+    text-align: center;
+    background-color: rgb(23, 162, 184) !important;
+    /*box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);*/
+    height: 10%;
+    width: 99.94%;
+    margin-left: 0.03%;
+    margin-right: 0.03%;
+    border-color: rgb(4, 182, 143);
+    border-style: solid;
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
+    
+    
+}
+
+select{
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);
+}
+
+
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    margin-top: 0 !important;
+    padding: 0.3%;
+    line-height: 50%;
+    
+    
+}
+
+#painelHeader{
+    position: fixed;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin-top: 0;
+    padding: 0.3%;
+}
+
+header{
+    margin-bottom: 0.5%;
+    padding: 0.3%;
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
+    
+}
+
+
+
+.table{
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184);
+    
+}
+
+
+
+button{
+    margin: 2px;
+    border-radius: 10% !important;
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
+}
+
+textarea{
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
+}
+
+
+
+
+/*FIM CSS IMPORTADO*/
+
+
+/* CSS DO INDEX */
+.divMenuPrincipal{
+    text-align: center;
+    vertical-align: middle !important;
+    width: 100%;
+    height: 800px;
+    /* border: 5px solid red !important; */
+}
+
+.divMenu{
+    cursor: pointer;
+    text-align: center !important;
+    vertical-align: middle !important;
+    
+    height: 25%;
+    margin: 1% 0;
+    
+    /* border: 2px solid blue !important; */
+    box-shadow: inset 0px 0px 4px 1px rgb(23, 162, 184) !important;
+    background-color:azure;
+}
+/* FIM - CSS DO INDEX */
+
+
+.divIcones{
+    margin: 1%;
+    margin-bottom: 0;
+    padding: 0.3%;
+    height: 50px;
+}
+
+
+.imgSom{
+    height: 100% !important;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.imgSom:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.spanFooter{
+    font-size: xx-small;
+    margin: 0 !important;
+    padding: 0;
+    border: none;
+}
+
+.bg-info{
+    width: 100%;
+    font-size: large;
+}
+.painelHeader{
+    font-size: large;
+}
