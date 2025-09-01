@@ -2,7 +2,7 @@
 um simples jogo feito de bozó que é muito jogado no Ceará.
 
 
-Site para acesso: https://portifolios.com/ciro/bozo/
+Site para acesso: https://gerardao.com.br/ciro/bozo/
 
 Linguagens: HTML, CSS, Javascript.
 
